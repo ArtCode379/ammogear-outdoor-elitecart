@@ -125,7 +125,7 @@ private fun ProductDetailsScreenContent(
 
                         // Category chip
                         SuggestionChip(
-                            onClick = { },
+                            onClick = { Unit },
                             label = {
                                 Text(
                                     text = stringResource(data.category.titleRes),

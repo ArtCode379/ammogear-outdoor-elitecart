@@ -106,7 +106,7 @@ private fun OrderCard(order: OrderEntity) {
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                 )
                 SuggestionChip(
-                    onClick = { },
+                    onClick = { Unit },
                     label = { Text("Completed", fontSize = 11.sp) },
                     colors = SuggestionChipDefaults.suggestionChipColors(
                         containerColor = Success.copy(alpha = 0.12f),
