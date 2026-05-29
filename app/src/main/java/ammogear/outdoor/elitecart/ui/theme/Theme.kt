@@ -1,57 +1,56 @@
 package ammogear.outdoor.elitecart.ui.theme
 
-import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
+import androidx.compose.ui.unit.sp
+import ammogear.outdoor.elitecart.R
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+val provider = GoogleFont.Provider(
+    providerAuthority = "com.google.android.gms.fonts",
+    providerPackage = "com.google.android.gms",
+    certificates = R.array.com_google_android_gms_fonts_certs
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+val HeadingFamily = FontFamily(
+    Font(GoogleFont("DM Sans"), provider, weight = FontWeight.Bold)
+)
+val BodyFamily = FontFamily(
+    Font(GoogleFont("Nunito"), provider, weight = FontWeight.Normal)
+)
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+val AppTypography = Typography(
+    displayLarge   = TextStyle(fontFamily = HeadingFamily, fontWeight = FontWeight.Bold,     fontSize = 32.sp),
+    headlineMedium = TextStyle(fontFamily = HeadingFamily, fontWeight = FontWeight.SemiBold, fontSize = 24.sp),
+    titleLarge     = TextStyle(fontFamily = HeadingFamily, fontWeight = FontWeight.SemiBold, fontSize = 20.sp),
+    titleMedium    = TextStyle(fontFamily = HeadingFamily, fontWeight = FontWeight.Medium,   fontSize = 16.sp),
+    bodyLarge      = TextStyle(fontFamily = BodyFamily,    fontWeight = FontWeight.Normal,   fontSize = 16.sp),
+    bodyMedium     = TextStyle(fontFamily = BodyFamily,    fontWeight = FontWeight.Normal,   fontSize = 14.sp),
+    labelSmall     = TextStyle(fontFamily = BodyFamily,    fontWeight = FontWeight.Medium,   fontSize = 11.sp),
+)
+
+private val AppColorScheme = lightColorScheme(
+    primary        = Primary,
+    onPrimary      = OnPrimary,
+    secondary      = Accent,
+    background     = Background,
+    surface        = Surface,
+    onSurface      = OnSurface,
+    onBackground   = OnSurface,
+    outline        = Border,
 )
 
 @Composable
-fun ProductAppYPPTTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
+fun ProductAppYPPTTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+        colorScheme = AppColorScheme,
+        typography  = AppTypography,
+        content     = content
     )
 }
